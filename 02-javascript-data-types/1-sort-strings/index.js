@@ -6,4 +6,14 @@
  */
 export function sortStrings(arr, param = 'asc') {
 
+  const order = {
+    asc: 1,
+    desc: -1
+  }
+
+  const sortableArray = arr.map( string => string );
+
+  const result = sortableArray.sort( ( prev, next ) => order[param] * prev.localeCompare(next, 'ru', { caseFirst: 'upper' }) );
+
+  return result;
 }
