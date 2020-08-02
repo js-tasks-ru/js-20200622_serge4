@@ -243,16 +243,16 @@ export default class SortableTable {
     const { sortType, customSorting } = column;
     const direction = order === "asc" ? 1 : -1;
 
-    return arr.sort((a, b) => {
+    return arr.sort((prev, next) => {
       switch (sortType) {
         case "number":
-          return direction * (a[id] - b[id]);
+          return direction * (prev[id] - next[id]);
         case "string":
-          return direction * a[id].localeCompare(b[id], "ru");
+          return direction * prev[id].localeCompare(next[id], "ru");
         case "custom":
-          return direction * customSorting(a, b);
+          return direction * customSorting(prev, next);
         default:
-          return direction * (a[id] - b[id]);
+          return direction * (prev[id] - next[id]);
       }
     });
   }
